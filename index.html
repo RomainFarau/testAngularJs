@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>angular-js</title>
+		<meta name="viewport" content="initial-scale=1.0">
+		<link rel="stylesheet" ng-href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+		<script>
+			angular.module("todo",[])
+			.controller('TodoController', function(){
+				var todoCtrl=this;
+
+
+				todoCtrl.tasks = [
+				{description: "un"},
+				{description: "deux"},
+				];
+
+				todoCtrl.addTask = function (desc) {
+				todoCtrl.tasks.push({
+					description: desc
+				})
+				}
+				/*Mieux d'utiliser une fonction.*/
+				todoCtrl.changeRedClass = function(){
+					todoCtrl.isred = !todoCtrl.isred;
+				}
+			
+			})
+
+
+		</script>
+	</head>
+	<body ng-app="todo">
+
+		<ng-include src="'header.html'"></ng-include>
+		<div ng-controller="TodoController as todoCtrl">
+
+			<h1 ng-class="{red : todoCtrl.isred}" ng-click="todoCtrl.changeRedClass()">Le titre de la page</h1>
+
+			<ul>
+				<li ng-repeat="task in todoCtrl.tasks">{{ task.description | uppercase}}</li>
+			</ul>
+
+			<input type="text" ng-model="newtask">
+			<button ng-click="todoCtrl.addTask(newtask)">add</button>
+			<button ng-click="afficheMoi = !afficheMoi">show</button>
+			<div ng-show="afficheMoi"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolorum eveniet hic aspernatur iusto accusantium sint explicabo, alias assumenda earum corporis expedita, vitae fugiat dicta qui voluptas! Hic, unde non!</div>
+		</div>
+
+		<ng-include src="'footer.html'"></ng-include>
+	</body>
+</html>
