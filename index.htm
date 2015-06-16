@@ -6,21 +6,33 @@
 		<meta name="viewport" content="initial-scale=1.0">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
 		<script>
-			angular.module("app",[])
-			.controller('MyController', function(){
-				var user=this;
-				user.name="Thomas";
-				user.getName = function(){
-					return user.name;
+			angular.module("todo",[])
+			.controller('TodoController', function(){
+				var todoCtrl=this;
+
+				todoCtrl.tasks = [
+				{description: "un"},
+				{description: "deux"},
+				];
+
+				todoCtrl.addTask = function (desc) {
+				todoCtrl.tasks.push({
+					description: desc
+				})
 				}
 			})
+
+
 		</script>
 	</head>
-	<body ng-app="app">
-		<div ng-controller="MyController as user">
-			<h1>Bonjour {{ user.name }}</h1>
-			<input ng-model="user.name">
-			{{user.getName();}}
+	<body ng-app="todo">
+		<div ng-controller="TodoController as todoCtrl">
+			<ul>
+				<li ng-repeat="task in todoCtrl.tasks">{{ task.description }}</li>
+			</ul>
+
+			<input type="text" ng-model="newtask">
+			<button ng-click="todoCtrl.addTask(newtask)">add	</button>
 		</div>
 	</body>
 </html>
