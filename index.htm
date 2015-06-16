@@ -10,6 +10,9 @@
 			.controller('MyController', function(){
 				var user=this;
 				user.name="Thomas";
+				user.getName = function(){
+					return user.name;
+				}
 			})
 		</script>
 	</head>
@@ -17,6 +20,7 @@
 		<div ng-controller="MyController as user">
 			<h1>Bonjour {{ user.name }}</h1>
 			<input ng-model="user.name">
+			{{user.getName();}}
 		</div>
 	</body>
 </html>
