@@ -23,6 +23,9 @@
 				})
 				}
 
+				todoCtrl.changeRedClass = function(){
+					todoCtrl.isred = !todoCtrl.isred;
+				}
 			
 			})
 
@@ -32,7 +35,7 @@
 	<body ng-app="todo">
 		<div ng-controller="TodoController as todoCtrl">
 
-			<h1 ng-class="{red : todoCtrl.isred}" ng-click="todoCtrl.isred = !todoCtrl.isred">Le titre de la page</h1>
+			<h1 ng-class="{red : todoCtrl.isred}" ng-click="todoCtrl.changeRedClass()">Le titre de la page</h1>
 
 			<ul>
 				<li ng-repeat="task in todoCtrl.tasks">{{ task.description }}</li>
