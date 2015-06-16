@@ -32,6 +32,13 @@
 				}
 			})
 
+			.filter("bang", function(){
+				return function (input, nb){
+					var nbExc="!";
+					return input + nbExc.repeat(nb);
+				}
+			})
+
 
 		</script>
 	</head>
@@ -41,15 +48,20 @@
 		<div ng-controller="TodoController as todoCtrl">
 
 			<h1 ng-class="{red : todoCtrl.isred}" ng-click="todoCtrl.changeRedClass()">Le titre de la page</h1>
-
+			<input type="text" ng-model="motRecherche">
 			<ul>
-				<li ng-repeat="task in todoCtrl.tasks | orderBy:'description':todoCtrl.ordreTri">{{ task.description | uppercase}}</li>
+				<li ng-repeat="task in todoCtrl.tasks |
+				filter:motRecherche| 
+				orderBy:'description':todoCtrl.ordreTri">{{ task.description | uppercase | bang:5}}</li>
 			</ul>
 			<button ng-click="todoCtrl.changeOrdreTri()">ordreTri</button>
 			<input type="text" ng-model="newtask">
 			<button ng-click="todoCtrl.addTask(newtask)">add</button>
 			<button ng-click="afficheMoi = !afficheMoi">show</button>
 			<div ng-show="afficheMoi"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolorum eveniet hic aspernatur iusto accusantium sint explicabo, alias assumenda earum corporis expedita, vitae fugiat dicta qui voluptas! Hic, unde non!</div>
+
+			
+
 		</div>
 
 		<ng-include src="'footer.html'"></ng-include>
