@@ -7,6 +7,7 @@
 		<link rel="stylesheet" ng-href="css/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
 		<script>
+			"use strict";
 			angular.module("todo",[])
 			.controller('TodoController', function(){
 				var todoCtrl=this;
@@ -30,12 +31,26 @@
 				todoCtrl.changeOrdreTri = function(){
 					todoCtrl.ordreTri  = !todoCtrl.ordreTri;
 				}
+
+				
+			})
+
+			.controller('Ctrl', function(){
+							this.user1 = { name: "Thomas", email: "a@ici.fr"}
+							this.user2 = { email: "b@ici.fr"}
 			})
 
 			.filter("bang", function(){
 				return function (input, nb){
 					var nbExc="!";
 					return input + nbExc.repeat(nb);
+				}
+			})
+
+			.filter("username", function(){
+				return function (input){
+					if(!input) return "John Doe";
+					return input.name || input.email || "John Doe"
 				}
 			})
 
@@ -63,7 +78,11 @@
 			
 
 		</div>
-
+		<div ng-controller="Ctrl as ctrl">
+			{{ctrl.user1 | username}}
+			{{ctrl.user2 | username}}
+			{{ctrl.user3 | username}}
+		<div ng-controller="Ctrl as ctrl">
 		<ng-include src="'footer.html'"></ng-include>
 	</body>
 </html>
