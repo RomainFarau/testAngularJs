@@ -26,7 +26,10 @@
 				todoCtrl.changeRedClass = function(){
 					todoCtrl.isred = !todoCtrl.isred;
 				}
-			
+				todoCtrl.ordreTri=false;
+				todoCtrl.changeOrdreTri = function(){
+					todoCtrl.ordreTri  = !todoCtrl.ordreTri;
+				}
 			})
 
 
@@ -40,9 +43,9 @@
 			<h1 ng-class="{red : todoCtrl.isred}" ng-click="todoCtrl.changeRedClass()">Le titre de la page</h1>
 
 			<ul>
-				<li ng-repeat="task in todoCtrl.tasks">{{ task.description | uppercase}}</li>
+				<li ng-repeat="task in todoCtrl.tasks | orderBy:'description':todoCtrl.ordreTri">{{ task.description | uppercase}}</li>
 			</ul>
-
+			<button ng-click="todoCtrl.changeOrdreTri()">ordreTri</button>
 			<input type="text" ng-model="newtask">
 			<button ng-click="todoCtrl.addTask(newtask)">add</button>
 			<button ng-click="afficheMoi = !afficheMoi">show</button>
